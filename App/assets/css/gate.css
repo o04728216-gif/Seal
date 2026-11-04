@@ -1,0 +1,423 @@
+/* ==========================================================================
+   AN EVENING OF DISTINCTION — LUXURY INVITATION GATE
+   Ultra-Clear Vector Typography + 3K Native Stationery Artwork.
+   Flawless PC & Mobile Responsive Architecture.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;1,400;1,500&family=Pinyon+Script&family=Montserrat:wght@400;500&display=swap');
+
+:root {
+  --bg-canvas: #f5f4ef;
+  --gold-foil: linear-gradient(135deg, #8a6428 0%, #cca560 28%, #fdedca 50%, #b89047 75%, #765219 100%);
+  --gold-text: #a47d47;
+  --gold-glow: rgba(255, 215, 110, 0.95);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  background-color: var(--bg-canvas);
+  background-image: radial-gradient(circle at 50% 50%, #faf9f6 0%, #f4f3ed 60%, #e8e6dd 100%);
+  font-family: 'Cinzel', serif;
+  color: #3b3228;
+  position: relative;
+  touch-action: pan-y;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Cotton paper micro-noise texture */
+.paper-texture-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  z-index: 2;
+}
+
+/* Master Viewport Container (Perfect Centering on PC & Mobile) */
+.gate-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: env(safe-area-inset-top, 20px) env(safe-area-inset-right, 16px) env(safe-area-inset-bottom, 20px) env(safe-area-inset-left, 16px);
+  position: relative;
+  z-index: 10;
+}
+
+/* ==========================================================================
+   THE ULTRA-HD ARTWORK STAGE
+   Desktop Landscape: 1024 x 660 aspect ratio
+   Mobile Portrait: Zoomed vertical card presentation
+   ========================================================================== */
+
+.artwork-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1040px;
+  aspect-ratio: 1024 / 660;
+  box-shadow: 
+    0 25px 65px -15px rgba(60, 48, 35, 0.18),
+    0 10px 25px -10px rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #faf9f6;
+  margin: auto;
+  transform: translateZ(0);
+}
+
+/* 3K Ultra-High-Definition Base Artwork */
+.gate-base-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  border-radius: 6px;
+  pointer-events: none;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ==========================================================================
+   CRYSTAL-CLEAR VECTOR TYPOGRAPHY OVERLAY
+   Sub-pixel crisp rendering on 4K, PC & Mobile Retina displays.
+   ========================================================================== */
+
+.gate-typography-header {
+  position: absolute;
+  top: 6.8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 82%;
+  max-width: 650px;
+  text-align: center;
+  pointer-events: none;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Constellation SVG Diagram */
+.constellation-box {
+  width: 90px;
+  height: 46px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.constellation-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 2px rgba(220, 180, 90, 0.45));
+}
+
+.constellation-svg line {
+  stroke: #c8a362;
+  stroke-width: 1.05;
+  opacity: 0.85;
+}
+
+.constellation-svg circle {
+  fill: #e5c378;
+}
+
+/* "✦ You're Cordially Invited ✦" Script */
+.script-invite {
+  font-family: 'Pinyon Script', cursive;
+  font-size: clamp(1.4rem, 2.5vw, 2.35rem);
+  color: var(--gold-text);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.95), 0 0 12px rgba(230, 195, 130, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.script-invite .sparkle-diamond {
+  font-size: 0.8em;
+  color: #cca661;
+  vertical-align: middle;
+}
+
+/* "SAVE THE DATE" Foil Serif Title */
+.main-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.6rem, 3.2vw, 3.1rem);
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin: 4px 0 8px 0.32em; /* offset right letter-spacing */
+  background: var(--gold-foil);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1.5px 0.5px rgba(255, 255, 255, 0.95)) drop-shadow(0 2px 4px rgba(100, 70, 30, 0.22));
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+/* Gold Hairline Divider with Diamond */
+.ornament-divider {
+  width: 130px;
+  height: 8px;
+  margin: 0 auto 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ornament-divider::before, .ornament-divider::after {
+  content: '';
+  flex: 1;
+  height: 0.95px;
+  background: linear-gradient(90deg, transparent, #cda764 40%, #cda764 80%, transparent);
+}
+
+.ornament-divider::after {
+  background: linear-gradient(270deg, transparent, #cda764 40%, #cda764 80%, transparent);
+}
+
+.ornament-divider .center-dot {
+  width: 4.5px;
+  height: 4.5px;
+  background: #c89f57;
+  transform: rotate(45deg);
+  margin: 0 8px;
+  box-shadow: 0 0 4px rgba(200, 160, 80, 0.5);
+}
+
+/* Italic Subtitle */
+.pleasure-line {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.78rem, 1.25vw, 1.18rem);
+  color: #877a6a;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+/* ==========================================================================
+   INTERACTIVE WAX SEAL & HIGH-DPI BINGING CANVAS
+   Mathematically anchored: 50.0% X, 59.7% Y, height: 11.2% of stage.
+   ========================================================================== */
+
+.seal-interactive-anchor {
+  position: absolute;
+  left: 50%;
+  top: 59.7%;
+  transform: translate(-50%, -50%);
+  height: 11.2%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  z-index: 40;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  touch-action: none;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+}
+
+/* Expanded Touch Hitbox for Mobile Thumbs */
+.seal-interactive-anchor::after {
+  content: '';
+  position: absolute;
+  inset: -24px;
+  border-radius: 50%;
+  pointer-events: auto;
+}
+
+.seal-interactive-anchor:hover {
+  box-shadow: 0 0 16px rgba(220, 175, 75, 0.45);
+  transform: translate(-50%, -50%) scale(1.02);
+}
+
+.seal-interactive-anchor.pressed {
+  box-shadow: 0 0 28px rgba(255, 215, 90, 0.85);
+  transform: translate(-50%, -50%) scale(0.97);
+}
+
+/* High-DPI Canvas for Liquid Progress, Shockwave Bings & Embers */
+.bing-canvas {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 340px;
+  height: 340px;
+  pointer-events: none;
+  z-index: 45;
+  touch-action: none;
+}
+
+/* ==========================================================================
+   DYNAMIC INSTRUCTION TEXT OVERLAY
+   Directly over "+ PRESS THE SEAL TO OPEN +" (top: 77.9%, left: 50%)
+   ========================================================================== */
+
+.instruction-overlay-box {
+  position: absolute;
+  left: 50%;
+  top: 77.9%;
+  transform: translate(-50%, -50%);
+  z-index: 35;
+  text-align: center;
+  pointer-events: none;
+  width: 100%;
+}
+
+.gate-instruction-text {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.72rem, 1.1vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: #8c7e6c;
+  text-transform: uppercase;
+  background: #f8f6f0;
+  padding: 4px 18px;
+  border-radius: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.gate-instruction-text.holding {
+  color: #a8782a;
+  background: #fffdf8;
+  transform: scale(1.06);
+  box-shadow: 0 0 14px rgba(220, 175, 75, 0.35);
+}
+
+.gate-instruction-text.warn {
+  color: #a82e2e;
+  background: #fff8f8;
+  animation: subtleShake 0.4s ease;
+}
+
+.gate-instruction-text.unsealed {
+  color: #4a7a40;
+  background: #f4faf2;
+  box-shadow: 0 0 16px rgba(100, 180, 80, 0.35);
+}
+
+@keyframes subtleShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* ==========================================================================
+   MOBILE VERTICAL PORTRAIT PRESENTATION ("SHOW VERTICAL ON MOBILE")
+   Zooms into the artwork center column so it fills phone screens vertically!
+   ========================================================================== */
+
+@media (max-width: 768px) and (orientation: portrait), (max-width: 580px) {
+  .gate-screen {
+    padding: env(safe-area-inset-top, 10px) env(safe-area-inset-right, 10px) env(safe-area-inset-bottom, 10px) env(safe-area-inset-left, 10px);
+    align-items: center;
+  }
+
+  /* Vertical portrait card container */
+  .artwork-stage {
+    width: min(94vw, 440px);
+    height: min(84vh, 84dvh, 720px);
+    max-height: 720px;
+    aspect-ratio: auto;
+    border-radius: 10px;
+    box-shadow: 
+      0 20px 50px -10px rgba(50, 38, 25, 0.3),
+      0 0 0 1px rgba(220, 210, 195, 0.8);
+  }
+
+  .gate-base-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .gate-typography-header {
+    top: 5.5%;
+    width: 90%;
+  }
+
+  .constellation-box {
+    width: 74px;
+    height: 38px;
+    margin-bottom: 4px;
+  }
+
+  .script-invite {
+    font-size: 1.45rem;
+    margin-bottom: 2px;
+  }
+
+  .main-title {
+    font-size: 1.7rem;
+    letter-spacing: 0.22em;
+    margin: 2px 0 6px 0.22em;
+  }
+
+  .ornament-divider {
+    width: 110px;
+    margin-bottom: 6px;
+  }
+
+  .pleasure-line {
+    font-size: 0.76rem;
+  }
+
+  .seal-interactive-anchor {
+    height: 11.2%;
+  }
+
+  .gate-instruction-text {
+    font-size: clamp(0.68rem, 2.9vw, 0.85rem);
+    letter-spacing: 0.22em;
+    padding: 4px 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .script-invite {
+    font-size: 1.25rem;
+  }
+  .main-title {
+    font-size: 1.45rem;
+    letter-spacing: 0.18em;
+  }
+  .gate-instruction-text {
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    padding: 3px 10px;
+  }
+}
