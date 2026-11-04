@@ -73,6 +73,7 @@ $gateToken = $_SESSION['gate_token'];
       <!-- Interactive Wax Seal Anchor (Anchored to exact seal position: 50.0% X, 59.7% Y) -->
       <!-- The wax seal is rendered natively from the 3K artwork with zero cut/halo artifacts -->
       <div class="seal-interactive-anchor" id="sealAnchor" role="button" tabindex="0" aria-label="Press and hold the seal for 3 seconds to unseal the invitation">
+        <span class="seal-idle-ring" aria-hidden="true"></span>
         <!-- High-DPI Canvas for Molten Gold Progress Arc, Shockwave Bings & Embers -->
         <canvas id="bingCanvas" class="bing-canvas"></canvas>
       </div>

@@ -2,8 +2,11 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-// Guard: Only allow viewing if unlocked via the gate!
-if (empty($_SESSION['gate_unlocked']) && !isset($_GET['preview'])) {
+header('Cache-Control: private, no-store, max-age=0');
+header('X-Robots-Tag: noindex, nofollow, noarchive');
+
+// Only sessions unlocked through the validated seal-hold flow can view this page.
+if (empty($_SESSION['gate_unlocked']) || ($_SESSION['gate_unlock_version'] ?? 0) !== 1) {
     header('Location: index.php?locked=1');
     exit;
 }

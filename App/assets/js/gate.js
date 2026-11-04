@@ -12,6 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!sealAnchor || !canvas) return;
 
+  const artwork = stage?.querySelector('.gate-base-img');
+  const revealSealIndicator = () => stage?.classList.add('artwork-ready');
+  if (artwork?.complete && artwork.naturalWidth > 0) {
+    revealSealIndicator();
+  } else {
+    artwork?.addEventListener('load', revealSealIndicator, { once: true });
+  }
+
   const ctx = canvas.getContext('2d');
   const HOLD_DURATION = 3000; // Exactly 3000ms
   const BING_INTERVAL = 750;  // Harmonic ping cadence (0s, 0.75s, 1.5s, 2.25s)
@@ -28,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let nextBingTime = 0;
   let bingIndex = 0;
   let isUnlocked = false;
+  let gateHoldStartRequest = Promise.resolve(false);
 
   // Particle and Ripple pools
   const ripples = [];
@@ -76,6 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
 
     isHolding = true;
+    gateHoldStartRequest = sendGateAction('start_hold')
+      .then(({ ok, data }) => ok && data.success === true)
+      .catch(() => false);
     startTime = performance.now();
     elapsed = 0;
     bingIndex = 0;
@@ -103,11 +115,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function handlePointerUp() {
     if (!isHolding) return;
+    const heldFor = performance.now() - startTime;
     isHolding = false;
     sealAnchor.classList.remove('pressed');
     window.luxuryAudio.stopHoldShimmer();
 
     if (isUnlocked) return;
+
+    if (heldFor >= HOLD_DURATION) {
+      elapsed = HOLD_DURATION;
+      completeUnseal(canvasWidth / 2);
+      return;
+    }
+
+    sendGateAction('cancel_hold').catch(() => {});
 
     // If released before 3 seconds
     if (instruction) {
@@ -376,32 +397,41 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Unlocks the backend PHP session and smoothly navigates to invitation.php
    */
-  function transitionToInvitation() {
+  function sendGateAction(action) {
     const gateToken = document.querySelector('meta[name="gate-token"]')?.content || '';
-
-    // Notify backend to unlock session
-    fetch('unlock.php', {
+    return fetch('unlock.php', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        action: 'unlock_gate',
-        gate_token: gateToken
-      })
-    })
-    .catch(() => {
-      // Ignore network errors, proceed with transition
-    })
-    .finally(() => {
-      // Allow user to see the golden fireworks and hear the fanfare (750ms), then transition
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ action, gate_token: gateToken })
+    }).then(async (response) => ({
+      ok: response.ok,
+      data: await response.json().catch(() => ({}))
+    }));
+  }
+
+  async function transitionToInvitation() {
+    try {
+      const holdStarted = await gateHoldStartRequest;
+      if (!holdStarted) throw new Error('Hold start was not accepted');
+
+      const result = await sendGateAction('unlock_gate');
+      if (!result.ok || result.data.success !== true) throw new Error('Hold was not verified');
+
+      // Let the user see the reveal, then open the server-validated invitation page.
       setTimeout(() => {
         document.body.style.transition = 'opacity 0.6s ease';
         document.body.style.opacity = '0';
-        setTimeout(() => {
-          window.location.href = 'invitation.php';
-        }, 500);
+        setTimeout(() => { window.location.href = 'invitation.php'; }, 500);
       }, 750);
-    });
+    } catch (error) {
+      isUnlocked = false;
+      sealAnchor.classList.remove('unsealed');
+      if (instruction) {
+        instruction.classList.remove('unsealed', 'holding');
+        instruction.classList.add('warn');
+        instruction.textContent = '✦ CONNECTION ISSUE — PLEASE TRY AGAIN ✦';
+      }
+    }
   }
 });
